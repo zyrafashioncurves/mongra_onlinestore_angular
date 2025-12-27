@@ -1,0 +1,41 @@
+name: Deploy Angular App to S3 + CloudFront
+
+on:
+  push:
+    branches:
+      - master   # only deploy when code is merged to master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Angular app
+        run: npm run build -- --configuration production
+
+      # Configure AWS credentials (official AWS action)
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-north-1   
+
+      # Deploy to S3
+      - name: Sync files to S3
+        run: aws s3 sync ./dist/sakai-ng/browser s3://mongra-dev-angular-onlinestore --delete
+
+      # Invalidate CloudFront cache
+      - name: Invalidate CloudFront cache
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"

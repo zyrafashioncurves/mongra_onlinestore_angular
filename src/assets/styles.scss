@@ -1,0 +1,95 @@
+/* You can add global styles to this file, and also import other style files */
+@use './tailwind.css';
+@use './layout/layout.scss';
+@use 'primeicons/primeicons.css';
+@use './demo/demo.scss';
+
+:host ::ng-deep .custom-cart-btn.p-button {
+  font-size: 0.75rem;        /* text-xs */
+  padding: 0.25rem 0.75rem;  /* px-3 py-1 */
+  border-radius: 9999px;     /* rounded-full */
+  border: 1px solid #d1d5db; /* border-gray-300 */
+}
+
+:host ::ng-deep .custom-cart-btn.p-button:hover {
+  background-color: #f3f4f6; /* hover:bg-gray-100 */
+}
+
+@media (max-width: 768px) {
+  .layout-wrapper,
+  .layout-main-container,
+  .layout-main {
+    margin-top: 5px !important;
+    margin-right: 8px;
+    padding: 0 !important;
+    width: 100vw;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  body, html {
+    padding: 0 !important;
+    margin-right: 2px !important;
+    width: 100%;
+    overflow-x: hidden;
+  }
+}
+
+@font-face {
+  font-family: 'Dune Rise';
+  src: url('/assets/fonts/dune-rise/Dune_Rise.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.my-title {
+  font-family: 'Dune Rise', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #000000;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0 #fff8e1, 
+               -1px -1px 0 #fff8e1, 
+               1px -1px 0 #fff8e1, 
+               -1px 1px 0 #fff8e1;
+  background: linear-gradient(to right, #320204, #ce801b);
+  -webkit-background-clip: text;
+  display: inline-block;
+}
+
+
+.dune-font {
+  font-family: 'Dune Rise';
+  font-size: small;
+}
+
+body {
+    
+    background-color: #ffffff;
+}
+
+// :root {
+//   --mongra-olive: #89bf1d;        /* Olive Green */
+//   --mongra-dark-olive: #5c8e06;   /* Dark Olive */
+//   --mongra-gold: #C9A24D;         /* Muted Premium Gold */
+//   --mongra-bg: #F7F8F4;           /* Soft wellness background */
+// }
+// .bg-mongra {
+//   background: linear-gradient(180deg, #F7F8F4, #EEF1E6);
+// }
+
+// .text-gold {
+//   color: var(--mongra-gold);
+// }
+
+// .border-gold {
+//   border-color: var(--mongra-gold);
+// }
+
+// .cart-drawer-root {
+//   width: 100%;
+//   max-width: 100vw;
+//   height: 100%;
+//   overflow-x: hidden;
+// }

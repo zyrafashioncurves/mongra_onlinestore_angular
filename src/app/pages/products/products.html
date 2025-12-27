@@ -1,0 +1,618 @@
+<section
+  class="relative min-h-screen flex items-center overflow-hidden"
+>
+
+  <!-- BACKGROUND CAROUSEL -->
+  <p-carousel
+    [value]="banners"
+    [numVisible]="1"
+    [numScroll]="1"
+    [circular]="true"
+    [autoplayInterval]="4000"
+    [showIndicators]="false"
+    [showNavigators]="false"
+    class="absolute inset-0 w-full h-full z-0"
+  >
+    <ng-template let-banner pTemplate="item">
+      <div class="relative w-full h-screen">
+
+        <!-- IMAGE -->
+        <img
+  [src]="banner.imageUrl"
+  alt="{{ banner.title }}"
+  class="w-full h-full
+         object-contain sm:object-cover
+         object-top sm:object-center 
+         bg-gradient-to-r from-[#6B8E23] to-[#2F4F2F]"
+/>
+
+
+        <!-- SOFT DARK OVERLAY -->
+        <!-- <div class="absolute inset-0 bg-black/30"></div> -->
+
+        <!-- ANIMATED GRADIENT OVERLAY -->
+        <div
+          class="absolute inset-0 bg-gradient-to-r
+                 from-yellow-200/20 via-pink-200/20 to-orange-200/20
+                 animate-gradient-x"
+        ></div>
+
+      </div>
+    </ng-template>
+  </p-carousel>
+
+  <!-- HERO CONTENT -->
+  <div
+    class="relative z-10 max-w-2xl px-6 md:px-24 text-white"
+    pAnimateOnScroll
+    enterClass="animate-enter fade-in-10 slide-in-from-l-12 animate-duration-1000"
+  >
+    <h1 class="text-4xl md:text-6xl font-semibold leading-tight">
+      Individualized Detox<br />
+      Backed by <span class="text-[#C2A14D]">Nature</span>
+    </h1>
+
+    <p class="mt-6 text-white/85 max-w-lg">
+      Mongra is a daily natural detox crafted from sun-dried lemongrass,
+      trusted for stress relief and gut health.
+    </p>
+
+    <div
+      class="mt-8 flex gap-4"
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-10 slide-in-from-b-8 animate-duration-1000"
+    >
+      <button class="bg-[#C2A14D] text-[#2F4F2F] px-6 py-3 rounded-full font-medium">
+        Subscribe & Save
+      </button>
+      <button class="bg-white/90 text-[#2F4F2F] px-6 py-3 rounded-full font-medium">
+        Buy Once
+      </button>
+    </div>
+  </div>
+
+  <!-- FEATURE STRIP -->
+  <div
+    class="absolute bottom-6 left-1/2 -translate-x-1/2
+           w-[92%] md:w-auto
+           bg-white/90 backdrop-blur
+           rounded-2xl px-4 py-3
+           flex gap-4 md:gap-6
+           overflow-x-auto md:overflow-visible
+           text-sm text-[#2F4F2F]
+           z-10"
+  >
+
+    <div
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-10 slide-in-from-b-6 animate-duration-800"
+      class="flex items-center gap-2 whitespace-nowrap"
+    >
+      <i class="pi pi-check-circle text-[#6B8E23]"></i>
+      Natural Detox
+    </div>
+
+    <div
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-10 slide-in-from-b-8 animate-duration-900"
+      class="flex items-center gap-2 whitespace-nowrap"
+    >
+      <i class="pi pi-check-circle text-[#6B8E23]"></i>
+      Clinically Trusted
+    </div>
+
+    <div
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-10 slide-in-from-b-10 animate-duration-1000"
+      class="flex items-center gap-2 whitespace-nowrap"
+    >
+      <i class="pi pi-check-circle text-[#6B8E23]"></i>
+      Easy Daily Use
+    </div>
+
+  </div>
+
+</section>
+
+
+
+@if (prodLength === 1) {
+
+<section
+  class="min-h-screen flex items-center justify-center
+         px-6 md:px-24"
+>
+
+  <div class="flex flex-col items-center text-center gap-6">
+@for (product of products; track product.id) { 
+  @for (variant of product.variants; track variant.id) { 
+    <img pAnimateOnScroll enterClass="animate-enter fade-in-10 spin-in-45 slide-in-from-t-12 animate-duration-1000" 
+    [src]="getVariantFrontImage(variant)"  class="block w-[180px] md:w-[260px] relative z-10" alt="Mongra Detox"
+     /> 
+     <p-button severity="contrast" size="large" label="Buy Now" (click)="onCardClick(product, variant)"  ></p-button>
+  }}
+
+  
+  <!-- <p-button severity="contrast" size="large" label="Add to cart" outlined ></p-button> -->
+    <h2 class="text-3xl md:text-5xl font-bold text-[#2F4F2F]">
+      Calm Your Body<br />
+      with <span class="text-[#C2A14D]">Mongra Detox</span>
+    </h2>
+
+    <p class="max-w-md text-gray-600">
+      Crafted from sun-dried lemongrass to reduce bloating,
+      stress, and support daily detox.
+    </p>
+
+
+
+  </div>
+
+</section>
+
+}@else {
+
+<section
+  class="min-h-screen 
+         grid grid-cols-1 md:grid-cols-3
+         items-center
+         px-6 md:px-24
+         gap-16 md:gap-8"
+>
+
+  <!-- PRODUCT COLUMN -->
+  <div class="relative flex justify-center order-1 md:order-2 h-[420px]">
+
+    @for (product of products; track product.id) {
+      @for (variant of product.variants; track variant.id) {
+
+        @if (variant.isFeatured) {
+
+          <div
+            (click)="onCardClick(product, variant)"
+            class="relative min-w-[160px] h-[420px]
+                   rounded-xl overflow-hidden
+                   shadow-md border border-gray-100
+                   bg-white cursor-pointer
+                   transition hover:shadow-xl group"
+          >
+
+            <!-- Wishlist -->
+            <p-button
+              [icon]="isInWishlist(variant) ? 'pi pi-heart-fill' : 'pi pi-heart'"
+              severity="danger"
+              outlined
+              rounded
+              size="small"
+              class="absolute top-2 right-2 z-10"
+              (onClick)="toggleWishlist(variant, $event)">
+            </p-button>
+
+            <!-- Image -->
+            <img
+              [src]="getVariantFrontImage(variant)"
+              class="w-full h-full object-cover"
+              alt="{{ product.name }}"
+            />
+
+            <!-- Footer -->
+            <div
+              class="absolute bottom-0 left-0 w-full px-3 py-2
+                     flex justify-between items-center
+                     bg-gradient-to-t from-white/95 to-white/20
+                     backdrop-blur border-t"
+            >
+              <p class="text-sm font-semibold truncate w-3/4">
+                {{ product.name }}
+              </p>
+
+              <p-button
+                label="ADD"
+                icon="pi pi-shopping-bag"
+                outlined
+                severity="warn">
+              </p-button>
+            </div>
+
+          </div>
+
+        }
+
+      }
+    }
+
+  </div>
+
+  <!-- TEXT COLUMN -->
+  <div class="order-2 md:order-1 text-center md:text-left">
+    <!-- your existing text -->
+  </div>
+
+  <!-- INFO COLUMN -->
+  <div class="order-3">
+    <!-- your existing price / benefits -->
+  </div>
+
+</section>
+
+}
+
+
+<section
+  class="min-h-screen bg-[#FAF8F4]
+         px-6 md:px-24 py-24
+         flex flex-col gap-16"
+>
+
+  <!-- SECTION HEADER -->
+  <div
+    class="max-w-3xl mx-auto text-center"
+    pAnimateOnScroll
+    enterClass="animate-enter fade-in-10 slide-in-from-b-12 animate-duration-1000"
+  >
+    <h2 class="text-3xl md:text-5xl font-bold text-[#2F4F2F]">
+      Crafted the <span class="text-[#C2A14D]">Natural Way</span>
+    </h2>
+
+    <p class="mt-4 text-gray-600">
+      Every scoop of Mongra Detox follows a slow, mindful process
+      that preserves nature's healing properties.
+    </p>
+  </div>
+
+  <!-- INGREDIENT STEPS -->
+  <div
+    class="grid grid-cols-1 md:grid-cols-4 gap-12"
+  >
+
+    <!-- STEP 1 -->
+    <div
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-10 slide-in-from-b-10 md:slide-in-from-l-12 animate-duration-1000"
+      class="bg-white rounded-2xl p-8 shadow-sm text-center"
+    >
+      <div
+        class="w-14 h-14 mx-auto rounded-full
+               bg-[#EEF1E6] flex items-center justify-center
+               text-[#6B8E23] text-2xl font-bold"
+      >
+        1
+      </div>
+
+      <h3 class="mt-6 text-xl font-semibold text-[#2F4F2F]">
+        Handpicked Lemongrass
+      </h3>
+
+      <p class="mt-3 text-gray-600 text-sm">
+        Fresh lemongrass is carefully sourced from trusted farms
+        to ensure purity and aroma.
+      </p>
+    </div>
+
+    <!-- STEP 2 -->
+    <div
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-10 slide-in-from-b-12 md:slide-in-from-l-6 animate-duration-1000"
+      class="bg-white rounded-2xl p-8 shadow-sm text-center"
+    >
+      <div
+        class="w-14 h-14 mx-auto rounded-full
+               bg-[#EEF1E6] flex items-center justify-center
+               text-[#6B8E23] text-2xl font-bold"
+      >
+        2
+      </div>
+
+      <h3 class="mt-6 text-xl font-semibold text-[#2F4F2F]">
+        Slow Shade Drying
+      </h3>
+
+      <p class="mt-3 text-gray-600 text-sm">
+        Dried naturally without heat to retain essential oils
+        and therapeutic benefits.
+      </p>
+    </div>
+
+    <!-- STEP 3 -->
+    <div
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-10 slide-in-from-b-14 md:slide-in-from-r-6 animate-duration-1000"
+      class="bg-white rounded-2xl p-8 shadow-sm text-center"
+    >
+      <div
+        class="w-14 h-14 mx-auto rounded-full
+               bg-[#EEF1E6] flex items-center justify-center
+               text-[#6B8E23] text-2xl font-bold"
+      >
+        3
+      </div>
+
+      <h3 class="mt-6 text-xl font-semibold text-[#2F4F2F]">
+        Gentle Grinding
+      </h3>
+
+      <p class="mt-3 text-gray-600 text-sm">
+        Ground in small batches to preserve flavor, freshness,
+        and detox potency.
+      </p>
+    </div>
+
+    <!-- STEP 4 -->
+    <div
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-10 slide-in-from-b-16 md:slide-in-from-r-12 animate-duration-1000"
+      class="bg-white rounded-2xl p-8 shadow-sm text-center"
+    >
+      <div
+        class="w-14 h-14 mx-auto rounded-full
+               bg-[#EEF1E6] flex items-center justify-center
+               text-[#6B8E23] text-2xl font-bold"
+      >
+        4
+      </div>
+
+      <h3 class="mt-6 text-xl font-semibold text-[#2F4F2F]">
+        Sealed for Freshness
+      </h3>
+
+      <p class="mt-3 text-gray-600 text-sm">
+        Packed immediately to lock aroma, taste,
+        and daily wellness benefits.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<section
+  class="min-h-screen 
+         px-6 md:px-24 py-28
+         flex flex-col items-center gap-20"
+>
+
+  <!-- TITLE -->
+  <div
+    class="text-center max-w-3xl"
+    pAnimateOnScroll
+    enterClass="animate-enter fade-in-10 slide-in-from-b-12 animate-duration-1000"
+  >
+    <h2 class="text-3xl md:text-5xl font-semibold text-[#2F4F2F]">
+      How to <span class="text-[#C2A14D]">Use</span>
+    </h2>
+    <p class="mt-4 text-gray-600">
+      A simple daily ritual designed to be calm, natural, and effective.
+    </p>
+  </div>
+
+  <!-- STEPS FLOW -->
+  <div class="relative flex flex-col items-center gap-24 max-w-xl">
+
+    <!-- STEP 1 -->
+    <div
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-10 scale-in-95 animate-duration-800"
+      class="step-card"
+    >
+      <div class="step-icon bg-[#EEF1E6] text-[#6B8E23]">
+        <i class="pi pi-plus"></i>
+      </div>
+      <h3>Measure</h3>
+      <p>Add one teaspoon of Mongra Detox to hot water.</p>
+    </div>
+
+    <!-- ARROW -->
+    <div
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-10 slide-in-from-b-4 animate-duration-600"
+      class="step-arrow"
+    >
+      <i class="pi pi-angle-down"></i>
+    </div>
+
+    <!-- STEP 2 -->
+    <div
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-10 scale-in-95 animate-duration-800"
+      class="step-card"
+    >
+      <div class="step-icon bg-[#EEF1E6] text-[#6B8E23]">
+        <i class="pi pi-clock"></i>
+      </div>
+      <h3>Steep</h3>
+      <p>Let it steep gently for 2-3 minutes.</p>
+    </div>
+
+    <!-- ARROW -->
+    <div
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-10 slide-in-from-b-4 animate-duration-600"
+      class="step-arrow"
+    >
+      <i class="pi pi-angle-down"></i>
+    </div>
+
+    <!-- STEP 3 -->
+    <div
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-10 scale-in-95 animate-duration-800"
+      class="step-card"
+    >
+      <div class="step-icon bg-[#EEF1E6] text-[#6B8E23]">
+        <i class="pi pi-heart"></i>
+      </div>
+      <h3>Sip Slowly</h3>
+      <p>Drink warm and allow your body to relax.</p>
+    </div>
+
+    <!-- ARROW -->
+    <div
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-10 slide-in-from-b-4 animate-duration-600"
+      class="step-arrow"
+    >
+      <i class="pi pi-angle-down"></i>
+    </div>
+
+    <!-- STEP 4 -->
+    <div
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-10 scale-in-95 animate-duration-800"
+      class="step-card"
+    >
+      <div class="step-icon bg-[#EEF1E6] text-[#6B8E23]">
+        <i class="pi pi-sun"></i>
+      </div>
+      <h3>Repeat Daily</h3>
+      <p>Enjoy once daily as part of your wellness routine.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<section
+  class="bg-[#E6F0E8]
+         px-4 md:px-24 py-28
+         flex flex-col gap-16 overflow-hidden"
+>
+
+  <!-- HEADER -->
+  <div
+    class="text-center max-w-3xl mx-auto"
+    pAnimateOnScroll
+    enterClass="animate-enter fade-in-10 slide-in-from-b-12 animate-duration-1000"
+  >
+    <h2 class="text-3xl md:text-5xl font-semibold text-[#2F4F2F]">
+      Loved by <span class="text-[#C2A14D]">Real People</span>
+    </h2>
+
+    <p class="mt-4 text-gray-600">
+      Thousands are making Mongra part of their daily wellness routine.
+    </p>
+  </div>
+
+  <!-- FULL WIDTH CAROUSEL -->
+  <p-carousel
+    [value]="reviews"
+    [numVisible]="3"
+    [numScroll]="1"
+    [circular]="true"
+    [autoplayInterval]="4000"
+    [responsiveOptions]="responsiveOptions"
+    [showIndicators]="true"
+    [showNavigators]="false"
+    class="w-full"
+  >
+
+    <ng-template let-review pTemplate="item">
+      <!-- CENTER ALIGN EACH SLIDE -->
+      <div class="flex justify-center px-4">
+        <div
+          pAnimateOnScroll
+          enterClass="animate-enter fade-in-10 scale-in-95 animate-duration-700"
+          class="bg-white rounded-2xl p-6 shadow-sm
+                 w-full max-w-sm
+                 flex flex-col justify-between"
+        >
+
+          <!-- STARS -->
+          <div class="text-[#C2A14D] text-lg mb-3">
+            ★★★★☆
+          </div>
+
+          <!-- REVIEW TEXT -->
+          <p class="text-gray-600 text-sm leading-relaxed">
+            “{{ review.text }}”
+          </p>
+
+          <!-- AUTHOR -->
+          <div class="mt-6 text-sm font-medium text-[#2F4F2F]">
+            — {{ review.name }},
+            <span class="text-gray-500">{{ review.location }}</span>
+          </div>
+
+        </div>
+      </div>
+    </ng-template>
+
+  </p-carousel>
+
+</section>
+
+<section
+  class="bg-gradient-to-r from-[#6B8E23] to-[#2F4F2F] rounded
+         px-6 md:px-24 py-28
+         text-white"
+>
+
+  <div
+    class="max-w-4xl mx-auto
+           flex flex-col gap-10
+           text-center"
+  >
+
+    <!-- HEADLINE -->
+    <h2
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-10 slide-in-from-b-12 animate-duration-1000"
+      class="text-3xl md:text-5xl font-semibold leading-tight"
+    >
+      Make Mongra Part of Your<br class="hidden md:block" />
+      Daily Wellness Ritual
+    </h2>
+
+    <!-- SUBTEXT -->
+    <p
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-10 slide-in-from-b-10 animate-duration-1000"
+      class="text-white/85 max-w-xl mx-auto"
+    >
+      A gentle, natural detox designed for daily use —
+      calm your body, support digestion, and feel lighter every day.
+    </p>
+
+    <!-- CTA BUTTONS -->
+    <div
+      class="flex flex-col md:flex-row
+             gap-4 justify-center"
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-10 slide-in-from-b-8 animate-duration-1000"
+    >
+      <!-- BUY ONCE -->
+      <button
+        class="bg-white text-[#2F4F2F]
+               px-10 py-4
+               rounded-full font-medium
+               hover:opacity-90 transition"
+      >
+        Buy Once
+      </button>
+
+      <!-- SUBSCRIBE -->
+      <button
+        class="bg-[#C2A14D] text-[#2F4F2F]
+               px-10 py-4
+               rounded-full font-medium
+               hover:opacity-90 transition"
+      >
+        Subscribe & Save
+      </button>
+    </div>
+
+    <!-- TRUST MICRO COPY -->
+    <div
+      class="text-sm text-white/75
+             flex flex-wrap justify-center gap-6 mt-6"
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-10 animate-duration-1000"
+    >
+      <span>✔ Free Shipping</span>
+      <span>✔ Cancel Anytime</span>
+      <span>✔ No Preservatives</span>
+      <span>✔ Daily Safe</span>
+    </div>
+
+  </div>
+
+</section>

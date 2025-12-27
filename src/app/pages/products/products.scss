@@ -1,0 +1,55 @@
+.step-card {
+  text-align: center;
+  max-width: 360px;
+}
+
+.step-card h3 {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2f4f2f;
+}
+
+.step-card p {
+  margin-top: 0.5rem;
+  color: #6b7280;
+}
+
+.step-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.animate-enter {
+  transform-style: preserve-3d;
+}
+
+/* Enables real 3D animation */
+.p-animate-enter {
+  transform-style: preserve-3d;
+}
+
+/* Product reveal animation */
+.product-reveal {
+  opacity: 0;
+  transform: perspective(900px) translateY(80px) rotateX(80deg);
+  filter: blur(12px);
+  transition:
+    transform 1.2s ease,
+    filter 1s ease,
+    opacity 0.8s ease;
+}
+
+.product-reveal.p-animate-enter-active {
+  opacity: 1;
+  transform: perspective(900px) translateY(0) rotateX(0deg);
+  filter: blur(0);
+}
+
+

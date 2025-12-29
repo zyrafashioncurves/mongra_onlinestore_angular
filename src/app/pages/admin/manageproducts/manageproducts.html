@@ -1,6 +1,6 @@
 <p-toolbar class="mb-6">
     <ng-template #start>
-        <p-button label="Add New Product" icon="pi pi-plus" severity="warn" raised class="mr-2" (onClick)="openNew()" />
+        <p-button label="Add New Product" icon="pi pi-plus" severity="contrast" raised class="mr-2" (onClick)="openNew()" />
 
     </ng-template>
 
@@ -30,8 +30,8 @@
             <th>Name</th>
             <th>Color</th>
             <th>Category</th>
-            <th>Reviews</th>
-            <th>Status</th>
+            <!-- <th>Reviews</th>
+            <th>Status</th> -->
             <th style="min-width: 10rem">Actions</th>
         </tr>
     </ng-template>
@@ -45,14 +45,14 @@
             
             <td>{{ item.color }}</td>
             <td>{{ item.category }}</td>
-            <td>
+            <!-- <td>
                 <p-rating [(ngModel)]="item.rating" [readonly]="true" />
             </td>
             <td>
                 <p-tag [value]="item.status" [severity]="getSeverity(item.status)" />
-            </td>
+            </td> -->
             <td>
-                <p-button icon="pi pi-pencil"  raised class="mr-2" label="View/Edit" severity="warn" outlined
+                <p-button icon="pi pi-pencil"  raised class="mr-2" label="Edit" severity="contrast" outlined
                     (click)="editProduct(item)" />
             </td>
         </tr>

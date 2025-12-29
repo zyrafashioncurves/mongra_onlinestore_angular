@@ -92,6 +92,8 @@ private normalizeGuestItem(raw: any) {
     sizeId: raw.sizeId ?? raw.selectedSizeObj?.sizeId ?? null,
     color: raw.color ?? null,
     price: raw.price ?? (raw.selectedSizeObj?.price) ?? 0,
+    originalPrice: raw.originalPrice ?? (raw.selectedSizeObj?.originalPrice) ?? 0,
+    discount: raw.discount ?? (raw.selectedSizeObj?.discount) ?? 0,
     discountPercentage: raw.discountPercentage ?? (raw.selectedSizeObj?.discountPercentage) ?? 0,
     availableQuantity: raw.availableQuantity ?? (raw.selectedSizeObj?.availableQuantity) ?? 1,
     imageUrl: raw.imageUrl ?? raw.productImage ?? '',
@@ -367,6 +369,9 @@ updateCartItem(item: any) {
     item.size = item.selectedSizeObj.size; // keep string for backend
     item.quantity=1;
     item.price=item.selectedSizeObj.priceAfterDiscount;
+    item.sizeId=item.selectedSizeObj.id;
+    item.originalPrice=item.selectedSizeObj.price;
+    item.discount=item.selectedSizeObj.discountPercentage;
     this.updateCartItem(item);
   }
 }

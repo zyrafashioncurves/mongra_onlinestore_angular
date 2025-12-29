@@ -119,11 +119,17 @@ if(localStorage.getItem("isLoggedIn")==="true"){
 
   const isExpired = this.jwtHelper.isTokenExpired();
   console.log('Token expired:', isExpired);
-
-  const roles = this.jwtHelper.getUserRoles();
+const roles = this.jwtHelper.getUserRoles();
   if (roles.includes('ROLE_ADMIN')) {
     this.isAdmin=true;
   }
+  if(isExpired){
+  localStorage.clear();
+    sessionStorage.clear();
+    this.jwtHelper.logout();
+    this.isLoggedIn = false;
+  }
+  
 
   }
   getBanners() {

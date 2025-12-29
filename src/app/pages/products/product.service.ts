@@ -102,15 +102,15 @@ addVariant(productParentId:any,formData: FormData) {
 
 checkParentProduct(params: {
   name: string,
-  category: string,
-  genderCategory: string,
-  subCategory: string
+  category: string
+  // genderCategory: string,
+  // subCategory: string
 }) {
   const queryParams = new HttpParams()
     .set('name', params.name)
-    .set('category', params.category)
-    .set('genderCategory', params.genderCategory)
-    .set('subCategory', params.subCategory);
+    .set('category', params.category);
+    // .set('genderCategory', params.genderCategory)
+    // .set('subCategory', params.subCategory);
 
   return this.http.post<any>(
     `${this.apiUrl}/admin/products/check-parent`,

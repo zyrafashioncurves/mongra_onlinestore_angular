@@ -174,14 +174,14 @@ checkParentProduct() {
   }
 
   // Validate genderCategory (object with .genderCategory or string)
-  if (!this.product.genderCategory || (typeof this.product.genderCategory === 'object' && !this.product.genderCategory.genderCategory)) {
-    errors.push('Gender Category');
-  }
+  // if (!this.product.genderCategory || (typeof this.product.genderCategory === 'object' && !this.product.genderCategory.genderCategory)) {
+  //   errors.push('Gender Category');
+  // }
 
   // Validate subCategory (object with .subCategory or string)
-  if (!this.product.subCategory || (typeof this.product.subCategory === 'object' && !this.product.subCategory.subCategory)) {
-    errors.push('Sub Category');
-  }
+  // if (!this.product.subCategory || (typeof this.product.subCategory === 'object' && !this.product.subCategory.subCategory)) {
+  //   errors.push('Sub Category');
+  // }
 
   // If any errors, show a toast
   if (errors.length > 0) {
@@ -198,8 +198,8 @@ checkParentProduct() {
   const params = {
     name: typeof this.product.name === 'string' ? this.product.name : this.product.name.productName,
     category: typeof this.product.category === 'string' ? this.product.category : this.product.category.category,
-    genderCategory: typeof this.product.genderCategory === 'string' ? this.product.genderCategory : this.product.genderCategory.genderCategory,
-    subCategory: typeof this.product.subCategory === 'string' ? this.product.subCategory : this.product.subCategory.subCategory
+    // genderCategory: typeof this.product.genderCategory === 'string' ? this.product.genderCategory : this.product.genderCategory.genderCategory,
+    // subCategory: typeof this.product.subCategory === 'string' ? this.product.subCategory : this.product.subCategory.subCategory
   };
 
   this.productService.checkParentProduct(params).subscribe({

@@ -333,15 +333,14 @@ drawerWidth = '520px';
     this.setUserMenuItem();
 this.setDrawerWidth();
     if (localStorage.getItem("isLoggedIn") === "true") {
-      this.cartService.getCart().subscribe(); // loads and updates BehaviorSubject
-      // this.getWishList();
+     
 
       // Keep the topbar badge live-updating
       this.cartService.cartCount$.subscribe((count: any) => {
         this.cartCount = count;
         this.cd.detectChanges();
 
-        this.productService.getWishlist().subscribe();
+       
     this.productService.wishlistCount$.subscribe(count => {
       this.wishlistCount = count;
       this.cd.detectChanges();

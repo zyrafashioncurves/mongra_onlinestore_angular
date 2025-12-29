@@ -47,9 +47,22 @@
               <p class="font-medium text-sm sm:text-base">
                 {{ item.variantName }}
               </p>
-              <p class="font-medium text-sm sm:text-base">
-               ₹{{ item.price }}
-              </p>
+              <div class="flex items-center gap-2 text-sm sm:text-base">
+    <!-- Discounted price -->
+    <span class="font-semibold text-green-600">
+      ₹{{ item.price }}
+    </span>
+
+    <!-- Original price (striked) -->
+    <span class="text-gray-400 text-sm line-through">
+      ₹{{ item.originalPrice }}
+    </span>
+
+    <!-- Discount percentage -->
+    <span class="text-red-500 font-medium">
+      ({{ item.discount }}% OFF)
+    </span>
+  </div>
               <p class="font-medium text-sm sm:text-base">
                 Color: {{ item.color }}
               </p>

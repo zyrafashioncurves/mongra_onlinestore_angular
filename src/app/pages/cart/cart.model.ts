@@ -6,6 +6,8 @@ export interface CartItemDto {
   sizeId:any;
   color:string;
   price: number;
+  originalPrice:number;
+  discount:number;
   quantity: number;
   imageUrl:String;
   total: number;
@@ -14,6 +16,7 @@ export interface CartItemDto {
   sizeOptions: any[];       
   selectedSizeObj:any;    // All sizes for autocomplete
   filteredSizeOptions: any[];   // Filtered for search
+
 }
 
 export interface CartResponse {

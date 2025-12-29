@@ -3,6 +3,7 @@ export interface CartItemDto {
   variantId:number;
   variantName: string;
   size:any;
+  sizeId:any;
   color:string;
   price: number;
   quantity: number;

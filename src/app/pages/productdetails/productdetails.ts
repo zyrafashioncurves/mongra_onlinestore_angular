@@ -203,7 +203,9 @@ hasUniformPrice(sizes: any[]): boolean {
 
 getDiscountedPrice(size: any): number {
   if (!size || size.discountPercentage === 0) return size.price;
-  return Math.round(size.price - (size.price * size.discountPercentage / 100));
+  const discounted =
+    size.price - (size.price * size.discountPercentage / 100);
+  return Math.ceil(discounted);
 }
 
 

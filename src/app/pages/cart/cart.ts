@@ -218,6 +218,7 @@ goToProductDetails(variantId: number): void {
 // }
 
 goToShop() {
+  this.cartService.closeDrawer();
   this.router.navigate(['/products']);
 }
 
@@ -313,7 +314,7 @@ decreaseQuantity(item: any) {
 updateCartItem(item: any) {
   if (localStorage.getItem("isLoggedIn") === "true") {
     // Logged-in: call backend
-    this.cartService.updateCartItem(item.id, item.quantity, item.size)
+    this.cartService.updateCartItem(item.id, item.quantity, item.size,item.sizeId)
       .subscribe({
         next: (res: any) => {
           console.log('Cart updated:', res);
@@ -365,6 +366,7 @@ updateCartItem(item: any) {
   if (item.selectedSizeObj) {
     item.size = item.selectedSizeObj.size; // keep string for backend
     item.quantity=1;
+    item.price=item.selectedSizeObj.priceAfterDiscount;
     this.updateCartItem(item);
   }
 }

@@ -68,13 +68,14 @@ private drawerVisibleSubject = new BehaviorSubject<boolean>(false);
 }
 
 
-    updateCartItem(productId: number, quantity: number, size: string) {
+    updateCartItem(productId: number, quantity: number, size: string,sizeId: number) {
 
 
     const params = new HttpParams()
       .set('productId', productId)
       .set('quantity', quantity)
-      .set('size', size);
+      .set('size', size)
+      .set('sizeId', sizeId);
 
     return this.http.post(`${this.baseUrl}/cart/update`, null, {params });
   }
